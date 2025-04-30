@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
 import './globals.css'
+import Link from 'next/link'
+import { ChartColumn, ChartColumnBigIcon } from 'lucide-react'
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -20,7 +22,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>{children}</body>
+      <body className={`${poppins.variable} antialiased`}>
+        <nav className="bg-primary p-4 text-white h-20 flex items-center justify-between">
+          <Link href="/" className="font-bold text-2xl flex gap-1 items-center">
+            <ChartColumn className="text-lime-500" />
+            FinanceTracker
+          </Link>
+          <div>auth button</div>
+        </nav>
+        {children}
+      </body>
     </html>
   )
 }
