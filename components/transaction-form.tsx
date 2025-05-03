@@ -28,7 +28,7 @@ import { Calendar } from './ui/calendar'
 import { Input } from './ui/input'
 import { type Category } from '@/types/Category'
 
-const transactionFormSchema = z.object({
+export const transactionFormSchema = z.object({
   transactionType: z.enum(['income', 'expense']),
   categoryId: z.coerce.number().positive('Please select a category'),
   transactionDate: z.coerce
@@ -72,7 +72,10 @@ export default function TransactionForm({ categories, onSubmit }: Props) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <fieldset className="grid grid-cols-2 gap-y-5 gap-x-2">
+        <fieldset
+          disabled={form.formState.isSubmitting}
+          className="grid grid-cols-2 gap-y-5 gap-x-2"
+        >
           <FormField
             control={form.control}
             name="transactionType"
@@ -194,7 +197,10 @@ export default function TransactionForm({ categories, onSubmit }: Props) {
             }}
           />
         </fieldset>
-        <fieldset className="mt-5 flex flex-col gap-5">
+        <fieldset
+          disabled={form.formState.isSubmitting}
+          className="mt-5 flex flex-col gap-5"
+        >
           <FormField
             control={form.control}
             name="description"
