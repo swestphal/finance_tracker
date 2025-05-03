@@ -41,11 +41,12 @@ const transactionFormSchema = z.object({
     .max(300, 'Description must not contain more than 300 characters'),
 })
 
-export default function TransactionForm({
-  categories,
-}: {
+type Props = {
   categories: Category[]
-}) {
+  onSubmit: (data: z.infer<typeof transactionFormSchema>) => Promise<void>
+}
+
+export default function TransactionForm({ categories, onSubmit }: Props) {
   const form = useForm<z.infer<typeof transactionFormSchema>>({
     resolver: zodResolver(transactionFormSchema),
     defaultValues: {
@@ -58,7 +59,7 @@ export default function TransactionForm({
   })
 
   const handleSubmit = async (data: z.infer<typeof transactionFormSchema>) => {
-    console.log(data)
+    onSubmit(data)
   }
 
   const transactionType = form.watch('transactionType')
