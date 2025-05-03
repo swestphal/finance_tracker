@@ -13,6 +13,7 @@ import {
 } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import UserDropdown from '@/components/user-dropdown'
+import { Toaster } from '@/components/ui/sonner'
 
 const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
@@ -59,6 +60,16 @@ export default function RootLayout({
             </div>
           </nav>
           {children}
+          <Toaster
+            position="bottom-center"
+            toastOptions={{
+              classNames: {
+                toast: 'toast',
+                title: 'text-lg font-semibold',
+                description: '!text-black',
+              },
+            }}
+          />
         </body>
       </html>
     </ClerkProvider>
