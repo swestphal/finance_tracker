@@ -9,7 +9,6 @@ import {
   SignedOut,
   SignInButton,
   SignUpButton,
-  UserButton,
 } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import UserDropdown from '@/components/user-dropdown'
