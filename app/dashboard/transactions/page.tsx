@@ -23,6 +23,7 @@ import Link from 'next/link'
 import numeral from 'numeral'
 import { z } from 'zod'
 import Filters from './filters'
+import { getTransactionYearsRange } from '@/data/getTransactionYearsRange'
 
 const today = new Date()
 
@@ -50,6 +51,7 @@ export default async function TransactionsPage({
   const selectedDate = new Date(year, month - 1, 1)
 
   const transactions = await getTransactionsByMonth({ month, year })
+  const yearsRange = await getTransactionYearsRange()
 
   return (
     <div className="max-w-screen-xl mx-auto py-10">
@@ -70,7 +72,7 @@ export default async function TransactionsPage({
         <CardHeader>
           <CardTitle className="flex justify-between">
             <span>{format(selectedDate, 'MMM yyyy')} Transactions</span>
-            <Filters year={year} month={month} yearsRange={[]} />
+            <Filters year={year} month={month} yearsRange={yearsRange} />
           </CardTitle>
         </CardHeader>
         <CardContent>
