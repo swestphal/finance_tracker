@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/ui/button'
 import {
   Select,
   SelectContent,
@@ -9,6 +10,7 @@ import {
 } from '@/components/ui/select'
 
 import { format } from 'date-fns'
+import Link from 'next/link'
 import { useState } from 'react'
 
 export default function Filters({
@@ -24,7 +26,7 @@ export default function Filters({
   const [selectedYear, setSelectedYear] = useState(year)
 
   return (
-    <>
+    <div className="flex gap-2">
       <Select
         value={selectedMonth.toString()}
         onValueChange={(newValue) => setSelectedMonth(Number(newValue))}
@@ -40,6 +42,29 @@ export default function Filters({
           ))}
         </SelectContent>
       </Select>
-    </>
+
+      <Select
+        value={selectedYear.toString()}
+        onValueChange={(newValue) => setSelectedYear(Number(newValue))}
+      >
+        <SelectTrigger>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {yearsRange.map((year) => (
+            <SelectItem key={year} value={`${year}`}>
+              {year}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      <Button asChild>
+        <Link
+          href={`/dashboard/transactions?year=${selectedYear}&month=${selectedMonth}`}
+        >
+          Go
+        </Link>
+      </Button>
+    </div>
   )
 }
