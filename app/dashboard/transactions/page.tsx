@@ -22,6 +22,7 @@ import { PencilIcon } from 'lucide-react'
 import Link from 'next/link'
 import numeral from 'numeral'
 import { z } from 'zod'
+import Filters from './filters'
 
 const today = new Date()
 
@@ -69,7 +70,7 @@ export default async function TransactionsPage({
         <CardHeader>
           <CardTitle className="flex justify-between">
             <span>{format(selectedDate, 'MMM yyyy')} Transactions</span>
-            <div>dropdowns</div>
+            <Filters year={year} month={month} yearsRange={[]} />
           </CardTitle>
         </CardHeader>
         <CardContent>
